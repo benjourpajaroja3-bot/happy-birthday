@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Letter For You 💌</title>
+
+<style>
+
+/* =========================================
+   BASIC
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f5aec8;
+}
+
+
+/* =========================================
+   DREAMY BACKGROUND
+========================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 18% 18%,
+            rgba(255,255,255,.75),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(255,105,180,.45),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #ffdce9,
+            #f5aec8,
+            #ed9dbc
+        );
+}
+
+
+/* Moving glow */
+
+.glow {
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.22);
+
+    filter: blur(80px);
+
+    animation:
+        moveGlow 10s
+        infinite alternate
+        ease-in-out;
+}
+
+.glow.one {
+    left: -150px;
+    top: -130px;
+}
+
+.glow.two {
+    right: -150px;
+    bottom: -150px;
+
+    animation-delay: 3s;
+}
+
+@keyframes moveGlow {
+
+    from {
+        transform: translate(0,0);
+    }
+
+    to {
+        transform: translate(100px,70px);
+    }
+}
+
+
+/* =========================================
+   FLOATING PARTICLES
+========================================= */
+
+#particles {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+
+    color: rgba(255,255,255,.85);
+
+    text-shadow:
+        0 0 8px white,
+        0 0 18px #ff78a7;
+
+    animation:
+        floatUp linear forwards;
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform:
+            translateY(110vh)
+            rotate(0deg)
+            scale(.4);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-15vh)
+            rotate(35deg)
+            scale(1.3);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   INTRO
+========================================= */
+
+.intro {
+    position: fixed;
+
+    top: 7%;
+    left: 50%;
+
+    width: 90%;
+
+    transform:
+        translateX(-50%);
+
+    text-align: center;
+
+    z-index: 10;
+
+    color: #9d4a67;
+
+    animation:
+        fadeDown 1.5s ease;
+}
+
+.intro h1 {
+
+    font-size: 27px;
+
+    line-height: 1.15;
+
+    letter-spacing: 1px;
+
+    color: #a9476d;
+
+    text-shadow:
+        0 2px 12px
+        rgba(255,255,255,.8);
+}
+
+.intro p {
+
+    margin-top: 10px;
+
+    font-size: 14px;
+
+    color: #a65b74;
+
+    opacity: .85;
+}
+
+@keyframes fadeDown {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translate(-50%, 0);
+    }
+}
+
+
+/* =========================================
+   ENVELOPE AREA
+========================================= */
+
+.envelope-area {
+
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    width: 330px;
+    height: 250px;
+
+    transform:
+        translate(-50%, -42%);
+
+    z-index: 20;
+
+    transition:
+        opacity .7s ease,
+        transform .8s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.envelope-area.hide {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -42%)
+        scale(.7);
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   ENVELOPE
+========================================= */
+
+.envelope {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    width: 300px;
+    height: 190px;
+
+    transform:
+        translateX(-50%);
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(
+            0 22px 30px
+            rgba(120,35,70,.25)
+        );
+
+    animation:
+        envelopeFloat 3.5s
+        ease-in-out infinite;
+}
+
+@keyframes envelopeFloat {
+
+    0%,100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            translateX(-50%)
+            translateY(-7px);
+    }
+}
+
+
+/* =========================================
+   ENVELOPE BACK
+========================================= */
+
+.envelope-back {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffd9e7,
+            #f6b6cd
+        );
+
+    border-radius:
+        8px 8px 15px 15px;
+
+    box-shadow:
+        inset 0 2px 8px
+        rgba(255,255,255,.7);
+
+    z-index: 1;
+}
+
+
+/* =========================================
+   LETTER INSIDE
+========================================= */
+
+.hidden-letter {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 18px;
+
+    width: 250px;
+    height: 145px;
+
+    transform:
+        translateX(-50%);
+
+    padding: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffefd,
+            #fff6f9
+        );
+
+    border-radius: 5px;
+
+    color: #754b59;
+
+    box-shadow:
+        0 5px 20px
+        rgba(100,30,60,.18);
+
+    overflow: hidden;
+
+    z-index: 2;
+
+    transition:
+        transform
+        1s
+        cubic-bezier(.2,.9,.2,1);
+}
+
+.hidden-letter h3 {
+
+    color: #c65378;
+
+    font-size: 17px;
+
+    margin-bottom: 8px;
+}
+
+.hidden-letter p {
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FRONT POCKET
+========================================= */
+
+.envelope-front {
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 145px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f9bfd3,
+            #efa8c2
+        );
+
+    border-radius:
+        0 0 15px 15px;
+
+    z-index: 5;
+
+    overflow: hidden;
+}
+
+
+/* LEFT FOLD */
+
+.envelope-front::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top:
+        145px solid transparent;
+
+    border-left:
+        150px solid #f6b5cb;
+}
+
+
+/* RIGHT FOLD */
+
+.envelope-front::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top:
+        145px solid transparent;
+
+    border-right:
+        150px solid #eca6c0;
+}
+
+
+/* =========================================
+   ENVELOPE FLAP
+========================================= */
+
+.flap {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        150px solid transparent;
+
+    border-right:
+        150px solid transparent;
+
+    border-top:
+        105px solid #ffd8e6;
+
+    transform-origin:
+        top center;
+
+    z-index: 8;
+
+    transition:
+        transform
+        1s
+        cubic-bezier(.2,.8,.2,1);
+
+    filter:
+        drop-shadow(
+            0 3px 5px
+            rgba(130,40,70,.12)
+        );
+}
+
+
+/* =========================================
+   HEART SEAL
+========================================= */
+
+.seal {
+
+    position: absolute;
+
+    left: 50%;
+    top: 108px;
+
+    width: 48px;
+    height: 48px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #f56f9a,
+            #d94d78
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 22px;
+
+    z-index: 12;
+
+    box-shadow:
+        0 5px 20px
+        rgba(205,55,105,.4),
+
+        0 0 25px
+        rgba(255,105,160,.4);
+
+    transition:
+        opacity .4s ease,
+        transform .6s ease;
+}
+
+
+/* =========================================
+   CLICK TEXT
+========================================= */
+
+.click-text {
+
+    position: absolute;
+
+    bottom: -42px;
+
+    left: 50%;
+
+    width: 100%;
+
+    transform:
+        translateX(-50%);
+
+    text-align: center;
+
+    color: #a44c69;
+
+    font-size: 13px;
+
+    animation:
+        breathe 1.8s
+        infinite alternate;
+}
+
+@keyframes breathe {
+
+    from {
+        opacity: .5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   OPEN ENVELOPE
+========================================= */
+
+.envelope.open .hidden-letter {
+
+    transform:
+        translateX(-50%)
+        translateY(-135px);
+
+    z-index: 10;
+}
+
+.envelope.open .flap {
+
+    transform:
+        rotateX(180deg);
+
+    z-index: 3;
+}
+
+.envelope.open .seal {
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.2);
+}
+
+
+/* =========================================
+   FULL LETTER MODAL
+========================================= */
+
+.letter-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background:
+        rgba(110,35,65,.25);
+
+    backdrop-filter:
+        blur(12px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .6s ease;
+}
+
+.letter-modal.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================
+   PAPER
+========================================= */
+
+.paper {
+
+    width:
+        min(90vw, 400px);
+
+    max-height: 82vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fffefd,
+            #fff6f8
+        );
+
+    border-radius: 20px;
+
+    padding:
+        30px 25px;
+
+    box-shadow:
+        0 30px 90px
+        rgba(75,20,45,.35);
+
+    overflow-y: auto;
+
+    transform:
+        translateY(100px)
+        scale(.85)
+        rotateX(15deg);
+
+    transition:
+        transform
+        .8s
+        cubic-bezier(.2,.9,.2,1);
+
+    color: #674652;
+
+    line-height: 1.8;
+}
+
+.letter-modal.show .paper {
+
+    transform:
+        translateY(0)
+        scale(1)
+        rotateX(0);
+}
+
+.paper::-webkit-scrollbar {
+
+    width: 5px;
+}
+
+.paper::-webkit-scrollbar-thumb {
+
+    background: #e5a0b8;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   LETTER TEXT
+========================================= */
+
+.paper h2 {
+
+    text-align: center;
+
+    color: #c95178;
+
+    margin-bottom: 22px;
+
+    font-size: 23px;
+}
+
+.paper .date {
+
+    text-align: right;
+
+    color: #b6788c;
+
+    font-size: 11px;
+
+    margin-bottom: 20px;
+}
+
+.paper p {
+
+    font-size: 14px;
+
+    margin-bottom: 17px;
+}
+
+.paper .special {
+
+    color: #c95178;
+
+    font-weight: bold;
+}
+
+.signature {
+
+    text-align: right;
+
+    color: #c34f76;
+
+    font-style: italic;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.close-letter {
+
+    display: block;
+
+    margin:
+        20px auto 0;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e96d94,
+            #d8507c
+        );
+
+    color: white;
+
+    padding:
+        11px 25px;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(210,70,110,.25);
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   SPARKLES
+========================================= */
+
+.sparkle {
+
+    position: fixed;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 18px #ff7eaa;
+
+    pointer-events: none;
+
+    z-index: 50;
+
+    animation:
+        sparkle 1.8s
+        ease-in-out infinite;
+}
+
+@keyframes sparkle {
+
+    0%,100% {
+
+        opacity: 0;
+
+        transform:
+            scale(.2);
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.5);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:380px) {
+
+    .envelope {
+
+        transform:
+            translateX(-50%)
+            scale(.88);
+    }
+
+    .intro h1 {
+
+        font-size: 23px;
+    }
+
+    .paper {
+
+        padding:
+            25px 20px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ======================================
+     BACKGROUND
+====================================== -->
+
+<div class="background">
+
+    <div class="glow one"></div>
+
+    <div class="glow two"></div>
+
+</div>
+
+
+<!-- PARTICLES -->
+
+<div id="particles"></div>
+
+
+<!-- ======================================
+     INTRO
+====================================== -->
+
+<div class="intro">
+
+    <h1>
+        A Little Something For You 💗
+    </h1>
+
+    <p>
+        There's a letter waiting for you...
+    </p>
+
+</div>
+
+
+<!-- ======================================
+     ENVELOPE
+====================================== -->
+
+<div
+    class="envelope-area"
+    id="envelopeArea">
+
+    <div
+        class="envelope"
+        id="envelope"
+        onclick="openEnvelope()">
+
+
+        <!-- BACK -->
+
+        <div class="envelope-back"></div>
+
+
+        <!-- LETTER INSIDE -->
+
+        <div class="hidden-letter">
+
+            <h3>
+                For You 💌
+            </h3>
+
+            <p>
+                There's something I've
+                been wanting to tell you...
+            </p>
+
+        </div>
+
+
+        <!-- FRONT POCKET -->
+
+        <div class="envelope-front"></div>
+
+
+        <!-- FLAP -->
+
+        <div class="flap"></div>
+
+
+        <!-- HEART SEAL -->
+
+        <div class="seal">
+            ♥
+        </div>
+
+
+        <!-- INSTRUCTION -->
+
+        <div class="click-text">
+            Tap the envelope 💌
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================
+     FULL LETTER
+====================================== -->
+
+<div
+    class="letter-modal"
+    id="letterModal">
+
+    <div class="paper">
+
+
+        <h2>
+            A Letter For You 💌
+        </h2>
+
+
+        <div class="date">
+            Written with a sincere heart
+        </div>
+
+
+        <p>
+            Dear H, 💗
+        </p>
+
+
+        <p>
+            I honestly don't know exactly
+            when it started. Maybe it was
+            the first time I really noticed
+            you.
+        </p>
+
+
+        <p>
+            There was something simple
+            about you, yet somehow you
+            caught my attention.
+        </p>
+
+
+        <p>
+            Maybe it was your
+            <span class="special">
+                long hair,
+            </span>
+            the way you wear your glasses,
+            your kindness, or simply the way
+            you carry yourself.
+        </p>
+
+
+        <p>
+            At first, I thought it was just
+            admiration. But as time passed,
+            I realized that I was slowly
+            becoming fond of you.
+        </p>
+
+
+        <p>
+            What makes you even more
+            special to me is your faith.
+            I admire that you're a
+            <span class="special">
+                woman of God,
+            </span>
+            someone who wants to grow
+            and follow Him.
+        </p>
+
+
+        <p>
+            I don't know what the future
+            holds, and I'm not asking you
+            to give me an answer.
+        </p>
+
+
+        <p>
+            I simply wanted you to know
+            that somewhere along the way,
+            you became someone
+            <span class="special">
+                very special to me.
+            </span>
+        </p>
+
+
+        <p>
+            Thank you for being yourself.
+            Thank you for the little moments,
+            the smiles, and the memories.
+        </p>
+
+
+        <p>
+            And if you ever wonder why
+            I smile whenever I see you...
+            maybe now you'll know. ❤️
+        </p>
+
+
+        <div class="signature">
+
+            Yours sincerely,<br>
+
+            Someone who admires you 💗
+
+        </div>
+
+
+        <button
+            class="close-letter"
+            onclick="closeLetter()">
+
+            Put the letter back 💌
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   FLOATING PARTICLES
+========================================= */
+
+const particles =
+    document.getElementById("particles");
+
+const symbols = [
+    "♡",
+    "♥",
+    "✦",
+    "✧",
+    "·"
+];
+
+
+function createParticle() {
+
+    const p =
+        document.createElement("div");
+
+    p.className =
+        "particle";
+
+    p.innerHTML =
+        symbols[
+            Math.floor(
+                Math.random() *
+                symbols.length
+            )
+        ];
+
+    p.style.left =
+        Math.random() * 100 + "vw";
+
+    p.style.fontSize =
+        (10 + Math.random() * 22)
+        + "px";
+
+    p.style.animationDuration =
+        (6 + Math.random() * 8)
+        + "s";
+
+    p.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    particles.appendChild(p);
+
+    setTimeout(
+        () => p.remove(),
+        16000
+    );
+}
+
+
+setInterval(
+    createParticle,
+    450
+);
+
+
+/* =========================================
+   SPARKLES
+========================================= */
+
+function sparkle() {
+
+    const s =
+        document.createElement("div");
+
+    s.className =
+        "sparkle";
+
+    s.style.left =
+        Math.random() * 100 + "vw";
+
+    s.style.top =
+        Math.random() * 100 + "vh";
+
+    s.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    document.body.appendChild(s);
+
+    setTimeout(
+        () => s.remove(),
+        2200
+    );
+}
+
+
+setInterval(
+    sparkle,
+    350
+);
+
+
+/* =========================================
+   OPEN ENVELOPE
+========================================= */
+
+function openEnvelope() {
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+    const area =
+        document.getElementById(
+            "envelopeArea"
+        );
+
+
+    /* Prevent double click */
+
+    if (
+        envelope.classList.contains("open")
+    ) {
+        return;
+    }
+
+
+    /* Open envelope */
+
+    envelope.classList.add("open");
+
+
+    /* Heart explosion */
+
+    burst();
+
+
+    /* Hide envelope */
+
+    setTimeout(() => {
+
+        area.classList.add("hide");
+
+    }, 1100);
+
+
+    /* Show full letter */
+
+    setTimeout(() => {
+
+        document
+            .getElementById(
+                "letterModal"
+            )
+            .classList.add("show");
+
+    }, 1450);
+}
+
+
+/* =========================================
+   CLOSE LETTER
+========================================= */
+
+function closeLetter() {
+
+    const modal =
+        document.getElementById(
+            "letterModal"
+        );
+
+    const area =
+        document.getElementById(
+            "envelopeArea"
+        );
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+
+    /* Close paper */
+
+    modal.classList.remove("show");
+
+
+    setTimeout(() => {
+
+        /* Reset envelope */
+
+        envelope.classList.remove(
+            "open"
+        );
+
+        /* Show envelope */
+
+        area.classList.remove(
+            "hide"
+        );
+
+    }, 550);
+}
+
+
+/* =========================================
+   HEART EXPLOSION
+========================================= */
+
+function burst() {
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        const h =
+            document.createElement("div");
+
+        h.innerHTML =
+            Math.random() > .3
+            ? "💗"
+            : "✨";
+
+
+        h.style.position =
+            "fixed";
+
+        h.style.left =
+            "50%";
+
+        h.style.top =
+            "50%";
+
+        h.style.zIndex =
+            "200";
+
+        h.style.pointerEvents =
+            "none";
+
+        h.style.fontSize =
+            (10 + Math.random() * 22)
+            + "px";
+
+
+        document.body.appendChild(h);
+
+
+        const angle =
+            Math.random() *
+            Math.PI * 2;
+
+        const distance =
+            100 +
+            Math.random() * 300;
+
+
+        const x =
+            Math.cos(angle) *
+            distance;
+
+        const y =
+            Math.sin(angle) *
+            distance;
+
+
+        h.animate(
+
+            [
+                {
+                    transform:
+                        "translate(-50%,-50%) scale(.2)",
+
+                    opacity: 1
+                },
+
+                {
+                    transform:
+                        `translate(
+                            calc(-50% + ${x}px),
+                            calc(-50% + ${y}px)
+                        )
+                        scale(1.3)`,
+
+                    opacity: 0
+                }
+            ],
+
+            {
+                duration:
+                    900 +
+                    Math.random() * 900,
+
+                easing:
+                    "cubic-bezier(.2,.8,.2,1)"
+            }
+        );
+
+
+        setTimeout(
+            () => h.remove(),
+            2000
+        );
+    }
+}
+
+</script>
+
+</body>
+</html>
